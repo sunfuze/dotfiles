@@ -226,4 +226,7 @@ fi
 ## Define any user-specific variables you want here.
 source ~/.bashrc_custom
 ## Add sudo bash_completion
-source /ect/bash_completion
+source /etc/bash_completion
+
+#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
+[[ -s "/home/fuzesun/.jenv/bin/jenv-init.sh" ]] && source "/home/fuzesun/.jenv/bin/jenv-init.sh" && source "/home/fuzesun/.jenv/commands/completion.sh"

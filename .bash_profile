@@ -63,3 +63,6 @@ export PATH=/usr/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/heroku/bin:$PATH # Heroku: https://toolbelt.heroku.com/standalone
+
+#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
+[[ -s "/home/fuzesun/.jenv/bin/jenv-init.sh" ]] && source "/home/fuzesun/.jenv/bin/jenv-init.sh" && source "/home/fuzesun/.jenv/commands/completion.sh"
