@@ -225,3 +225,5 @@ fi
 
 ## Define any user-specific variables you want here.
 source ~/.bashrc_custom
+## Add sudo bash_completion
+source /ect/bash_completion
