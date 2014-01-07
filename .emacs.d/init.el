@@ -26,8 +26,7 @@
 (setq save-abbrevs nil)
 (setq show-trailing-whitespace t)
 (setq suggest-key-bindings t)
-(setq vc-follow-symlinks t)
-
+(setq vc-follow-symlinks t) 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -75,3 +74,22 @@
 (require 'jade-mode)    
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
+
+;; -------------------------
+;; -- ELPA configuration
+;; -------------------------
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
+;; -------------------------
+;; -- c Mode configuration
+;; -------------------------
+(require 'cc-mode)
+(setq-default c-basic-offset 4 c-default-style "linux")
+(setq-default tab-width 4 indent-tabs-mode t)
+(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+;; -- enable autopaire --
+(require 'autopair)
+(autopair-global-mode 1)
+(setq autopair-autowrap t)

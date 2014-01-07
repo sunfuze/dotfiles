@@ -1,0 +1,3 @@
+[submodule ".emacs.d/ecb"]
+	path = .emacs.d/ecb
+	url = git://github.com/alexott/ecb
