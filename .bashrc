@@ -68,6 +68,7 @@
 #  Conversely, if the default group name is *different* from the username
 #  AND the user id is greater than 99, we're on the server, and set umask
 #  022 for easy collaborative editing.
+#  default file mode is 666 - mask, dir mode is 777 - mask
 if [ "`id -gn`" == "`id -un`" -a `id -u` -gt 99 ]; then
 	umask 002
 else
@@ -216,12 +217,19 @@ export NODE_DISABLE_COLORS=1
 if [ -s ~/.nvm/nvm.sh ]; then
     NVM_DIR=~/.nvm
     source ~/.nvm/nvm.sh
-    nvm use v0.10.12 &> /dev/null # silence nvm use; needed for rsync
+    nvm use v0.10.26 &> /dev/null # silence nvm use; needed for rsync
 fi
 
 ## ------------------------------
 ## -- 3) User-customized code  --
 ## ------------------------------
+
+## add git prompt
+# Set config variables first
+GIT_PROMPT_ONLY_IN_REPO=1
+
+# as last entry source the gitprompt script
+source .bash-git-prompt/gitprompt.sh
 
 ## Define any user-specific variables you want here.
 source ~/.bashrc_custom
@@ -230,3 +238,27 @@ source /etc/bash_completion
 
 #THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
 [[ -s "/home/fuzesun/.jenv/bin/jenv-init.sh" ]] && source "/home/fuzesun/.jenv/bin/jenv-init.sh" && source "/home/fuzesun/.jenv/commands/completion.sh"
+
+# Mark
+# See: http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
+
+export MARKPATH=$HOME/.marks
+function jump {
+    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+function mark {
+    mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
+}
+function unmark {
+    rm -i "$MARKPATH/$1"
+}
+function marks {
+    ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
+}
+_completemarks() {
+    local curw=${COMP_WORDS[COMP_CWORD]}
+    local wordlist=$(find $MARKPATH -type l -printf "%f\n")
+    COMPREPLY=($(compgen -W '${wordlist[@]}' -- "$curw"))
+    return 0
+}
+complete -F _completemarks jump unmark
