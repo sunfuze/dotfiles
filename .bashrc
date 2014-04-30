@@ -229,7 +229,7 @@ fi
 GIT_PROMPT_ONLY_IN_REPO=1
 
 # as last entry source the gitprompt script
-source .bash-git-prompt/gitprompt.sh
+source ~/.bash-git-prompt/gitprompt.sh
 
 ## Define any user-specific variables you want here.
 source ~/.bashrc_custom
