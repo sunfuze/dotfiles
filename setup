@@ -32,5 +32,7 @@ ln -sb $DOTFILES_DIR/.screenrc .
 ln -sb $DOTFILES_DIR/.bash_profile .
 ln -sb $DOTFILES_DIR/.bashrc .
 ln -sb $DOTFILES_DIR/.bashrc_custom .
+ln -sb $DOTFILES_DIR/.gitconfig .
 ln -sf $DOTFILES_DIR/.emacs.d .
 ln -sf $DOTFILES_DIR/.bash-git-prompt .
+
