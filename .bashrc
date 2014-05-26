@@ -236,9 +236,6 @@ source ~/.bashrc_custom
 ## Add sudo bash_completion
 source /etc/bash_completion
 
-#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
-[[ -s "/home/fuzesun/.jenv/bin/jenv-init.sh" ]] && source "/home/fuzesun/.jenv/bin/jenv-init.sh" && source "/home/fuzesun/.jenv/commands/completion.sh"
-
 # Mark
 # See: http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
 
@@ -262,3 +259,7 @@ _completemarks() {
     return 0
 }
 complete -F _completemarks jump unmark
+
+## set jenv
+JENV_DIR=$HOME/.jenv
+[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
