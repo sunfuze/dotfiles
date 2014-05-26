@@ -14,6 +14,8 @@ nvm install 0.10.28
 nvm use 0.10.28
 echo "install node done.\n"
 
+[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+
 # Install jshint to allow checking of JS code within emacs
 npm install -g jshint
 # Install rlwrap to provide libreadline features with node
@@ -35,4 +37,5 @@ ln -sb $DOTFILES_DIR/.bashrc_custom .
 ln -sb $DOTFILES_DIR/.gitconfig .
 ln -sf $DOTFILES_DIR/.emacs.d .
 ln -sf $DOTFILES_DIR/.bash-git-prompt .
-
+# install jenv
+curl -L -s get.jenv.io | bash
