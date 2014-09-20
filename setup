@@ -10,8 +10,8 @@ curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
 echo "install nvm done.\n"
 
 echo "install node\n"
-nvm install 0.10.28
-nvm use 0.10.28
+nvm install 0.11.13
+nvm use 0.11.13
 echo "install node done.\n"
 
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
@@ -21,8 +21,8 @@ npm install -g jshint
 # Install rlwrap to provide libreadline features with node
 # See: Http://nodejs.org/api/repl.html#repl_repl
 sudo apt-get install -y rlwrap
-# Install Screen
-sudo apt-get install -y screen
+# Install Screen(using tmux insteal)
+#sudo apt-get install -y screen
 # Install emacs24
 # https://launchpad.net/~cassou/+archive/emacs
 sudo apt-add-repository -y ppa:cassou/emacs
@@ -37,5 +37,10 @@ ln -sb $DOTFILES_DIR/.bashrc_custom .
 ln -sb $DOTFILES_DIR/.gitconfig .
 ln -sf $DOTFILES_DIR/.emacs.d .
 ln -sf $DOTFILES_DIR/.bash-git-prompt .
+ln -sf $DOTFILES_DIR/.fonts .
+
+# Install fonts
+fc-cache -fv
+ 
 # install jenv
-curl -L -s get.jenv.io | bash
+#curl -L -s get.jenv.io | bash
