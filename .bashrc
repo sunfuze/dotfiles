@@ -217,9 +217,11 @@ export NODE_DISABLE_COLORS=1
 if [ -s ~/.nvm/nvm.sh ]; then
     NVM_DIR=~/.nvm
     source ~/.nvm/nvm.sh
-    nvm use v0.10.26 &> /dev/null # silence nvm use; needed for rsync
+    nvm use v0.11.13 &> /dev/null # silence nvm use; needed for rsync
 fi
-
+# 2.8) docker
+alias dl='docker ps -l -q'
+alias da='docker ps -a -q'
 ## ------------------------------
 ## -- 3) User-customized code  --
 ## ------------------------------

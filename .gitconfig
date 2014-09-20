@@ -16,3 +16,5 @@
     sbc = submodule foreach co master
 [credential]
 	helper = store
+[core]
+	autocrlf = input
