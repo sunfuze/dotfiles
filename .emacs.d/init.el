@@ -27,6 +27,7 @@
 (setq show-trailing-whitespace t)
 (setq suggest-key-bindings t)
 (setq vc-follow-symlinks t) 
+(setq js-indent-line 2)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -100,21 +101,21 @@
 ;; -------------------------
 ;; -- enable ecb --
 ;; -------------------------
-(add-to-list 'load-path "~/.emacs.d/ecb")
-(require 'ecb)
+;;(add-to-list 'load-path "~/.emacs.d/ecb")
+;;(require 'ecb)
 ;; add ecb-setting
-(require 'ecb-setting)
-(defun my-ecb-active-or-deactive() 
-  (interactive)
-  (if ecb-minor-mode
-	(ecb-deactivate)
-	(ecb-activate)))
-(global-set-key (kbd "C-c C-i") 'my-ecb-active-or-deactive)
-(global-set-key (kbd "C-c e") 'ecb-goto-window-edit1)
-(global-set-key (kbd "C-c d") 'ecb-goto-window-directories)
-(global-set-key (kbd "C-c @") 'ecb-goto-window-sources)
-(global-set-key (kbd "C-c #") 'ecb-goto-window-methods)
-(global-set-key (kbd "C-c $") 'ecb-goto-window-compilation)
+;;(require 'ecb-setting)
+;;(defun my-ecb-active-or-deactive() 
+;;  (interactive)
+;;  (if ecb-minor-mode
+;;	(ecb-deactivate)
+;;	(ecb-activate)))
+;;(global-set-key (kbd "C-c C-i") 'my-ecb-active-or-deactive)
+;;(global-set-key (kbd "C-c e") 'ecb-goto-window-edit1)
+;;(global-set-key (kbd "C-c d") 'ecb-goto-window-directories)
+;;(global-set-key (kbd "C-c @") 'ecb-goto-window-sources)
+;;(global-set-key (kbd "C-c #") 'ecb-goto-window-methods)
+;;(global-set-key (kbd "C-c $") 'ecb-goto-window-compilation)
 
 ;; -------------------------
 ;; -- Config yasnipper and auto-complete --
@@ -130,13 +131,13 @@
 ;; -------------------------
 ;; -- Config cedet --
 ;; -------------------------
-(global-ede-mode 1)
-(semantic-mode 1)
+;;(global-ede-mode 1)
+;;(semantic-mode 1)
 
-(custom-set-variables
+;;(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ecb-layout-window-sizes (quote (("leftright2" (ecb-directories-buffer-name 0.25925925925925924 . 0.625) (ecb-sources-buffer-name 0.25925925925925924 . 0.35) (ecb-methods-buffer-name 0.2037037037037037 . 0.625) (ecb-history-buffer-name 0.2037037037037037 . 0.35)) ("left1" (ecb-directories-buffer-name 0.33121019108280253 . 0.28205128205128205) (ecb-sources-buffer-name 0.1592356687898089 . 0.358974358974359) (ecb-history-buffer-name 0.17197452229299362 . 0.358974358974359) (ecb-methods-buffer-name 0.33121019108280253 . 0.3333333333333333)))))
- '(ecb-source-path (quote ("~/Workspace/mupdf"))))
+;; '(ecb-layout-window-sizes (quote (("leftright2" (ecb-directories-buffer-name 0.25925925925925924 . 0.625) (ecb-sources-buffer-name 0.25925925925925924 . 0.35) (ecb-methods-buffer-name 0.2037037037037037 . 0.625) (ecb-history-buffer-name 0.2037037037037037 . 0.35)) ("left1" (ecb-directories-buffer-name 0.33121019108280253 . 0.28205128205128205) (ecb-sources-buffer-name 0.1592356687898089 . 0.358974358974359) (ecb-history-buffer-name 0.17197452229299362 . 0.358974358974359) (ecb-methods-buffer-name 0.33121019108280253 . 0.3333333333333333)))))
+;; '(ecb-source-path (quote ("~/Workspace/mupdf"))))
