@@ -22,6 +22,8 @@
 (setq compilation-error-regexp-alist
       (cons 'jshint-cli compilation-error-regexp-alist))
 
+(add-hook 'js-mode-hool 'js2-minor-mode)
+(add-hook 'js2-mode-hook 'ac-js2-mode)
 (add-hook 'js-mode-hook '(lambda ()
                            (local-set-key "\C-x\C-e" 'eval-last-sexp)
                            (local-set-key "\C-cb" 'js-send-buffer)
