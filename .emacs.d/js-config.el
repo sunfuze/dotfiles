@@ -3,6 +3,7 @@
 ;; -------------------------------
 
 (require 'js-comint)
+(require 'js2-refactor)
 (defun whitespace-clean-and-compile ()
   (interactive)
   (whitespace-cleanup-all)
@@ -11,18 +12,14 @@
 ;; Configure jshint for JS style checking.
 ;;   - Install: $ npm install -g jshint
 ;;   - Usage: Hit C-cC-u within any emacs buffer visiting a .js file
-(setq jshint-cli "jshint --show-non-errors ")
-  (setq compilation-error-regexp-alist-alist
-	(cons '(jshint-cli "^\\([a-zA-Z\.0-9_/-]+\\): line \\([0-9]+\\), col \\([0-9]+\\)"
-		1 ;; file
-		2 ;; line
-		3 ;; column
-		)
-	      compilation-error-regexp-alist-alist))
-(setq compilation-error-regexp-alist
-      (cons 'jshint-cli compilation-error-regexp-alist))
+(require 'flycheck)
+(add-hook 'js-mode-hook
+		  (lambda () (flycheck-mode t)))
 
-(add-hook 'js-mode-hool 'js2-minor-mode)
+(setq js2-highlight-level 3)
+(setq js-indent-level 2)
+
+(add-hook 'js-mode-hook 'js2-minor-mode)
 (add-hook 'js2-mode-hook 'ac-js2-mode)
 (add-hook 'js-mode-hook '(lambda ()
                            (local-set-key "\C-x\C-e" 'eval-last-sexp)
@@ -79,3 +76,5 @@
 
 (add-hook 'comint-preoutput-filter-functions 'node-repl-comint-preoutput-filter)
 (add-hook 'comint-output-filter-functions 'node-repl-comint-preoutput-filter)
+(define-key js-mode-map "{" 'paredit-open-curly)
+(define-key js-mode-map "}" 'paredit-close-curly-and-newline)

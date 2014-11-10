@@ -67,6 +67,8 @@
 (global-set-key (kbd "C-c C-f") 'windmove-right)
 (global-set-key (kbd "C-c C-p") 'windmove-up)
 (global-set-key (kbd "C-c C-n") 'windmove-down)
+
+
 ;; ---------------------------
 ;; -- JS Mode configuration --
 ;; ---------------------------
@@ -77,8 +79,6 @@
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
-(setq js2-highlight-level 3)
-(setq js-indent-level 2)
 ;; ----------------------------
 ;; -- JSX Mode configuration --
 ;; ----------------------------
@@ -123,3 +123,15 @@
 (ac-config-default)
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
+;; ---------------------------
+;; -- Config tern ------------
+;; ---------------------------
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+(defun delete-tern-process ()
+  (interactive)
+  (delete-process "Tern"))
+(add-hook 'jsx-mode-hook (lambda () (tern-mode t)))
