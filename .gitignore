@@ -1,4 +1,6 @@
 *~
 **/elpa/archives/*
 **/semanticdb/*
-
+**/*.log
+**/ac-comphist.dat
+.tmux/plugins/*
