@@ -4,3 +4,6 @@
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = git://github.com/tmux-plugins/tpm
+[submodule ".emacs.d"]
+	path = .emacs.d
+	url = https://github.com/sunfuze/.emacs.d.git
