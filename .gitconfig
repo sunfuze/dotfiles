@@ -18,3 +18,5 @@
 	helper = store
 [core]
 	autocrlf = input
+[push]
+	default = matching
