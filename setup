@@ -21,8 +21,10 @@ npm install -g jshint
 # Install rlwrap to provide libreadline features with node
 # See: Http://nodejs.org/api/repl.html#repl_repl
 sudo apt-get install -y rlwrap
-# Install Screen(using tmux insteal)
-#sudo apt-get install -y screen
+# Install tmux(using tmux insteal)
+sudo apt-apt-repository -y ppa:pi-rho/dev
+sudo apt-get -qq update
+sudo apt-get install -y tmux=1.9a-1~ppa1~t
 # Install emacs24
 # https://launchpad.net/~cassou/+archive/emacs
 sudo apt-add-repository -y ppa:cassou/emacs
@@ -35,6 +37,7 @@ ln -sb $DOTFILES_DIR/.bash_profile .
 ln -sb $DOTFILES_DIR/.bashrc .
 ln -sb $DOTFILES_DIR/.bashrc_custom .
 ln -sb $DOTFILES_DIR/.gitconfig .
+ln -sb $DOTFILES_DIR/.tmux.conf .
 ln -sf $DOTFILES_DIR/.emacs.d .
 ln -sf $DOTFILES_DIR/.bash-git-prompt .
 ln -sf $DOTFILES_DIR/.fonts .
