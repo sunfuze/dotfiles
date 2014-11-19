@@ -38,8 +38,6 @@
 #      --norc option. The --rcfile file option will force Bash to read and
 #      execute commands from file instead of ~/.bashrc.
 
-
-
 # -----------------------------------
 # -- 1.1) Set up umask permissions --
 # -----------------------------------
