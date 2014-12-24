@@ -20,3 +20,5 @@
 	autocrlf = input
 [push]
 	default = matching
+[pull]
+	rebase = true
