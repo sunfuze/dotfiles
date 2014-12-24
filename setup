@@ -35,6 +35,11 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869
 sudo sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
 sudo apt-get update
 sudo apt-get install lxc-docker
+# Install zeal
+sudo add-apt-repository ppa:jerzy-kozera/zeal-ppa
+sudo apt-get -qq update 
+sudo apt-get install zeal
+
 cd ~
 ln -sb $DOTFILES_DIR/.screenrc .
 ln -sb $DOTFILES_DIR/.bash_profile .
