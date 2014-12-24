@@ -1,6 +1,6 @@
 [user]
-    email = sunfuze.1989@gmail.com
-    name = sunfuze
+	email = sunfuze.1989@gmail.com
+	name = sunfuze
 [alias]
     st = status -s
     ci = commit
