@@ -1,58 +1,57 @@
 #! /bin/bash
-DOTFILES_DIR=`pwd`
+DOTFILES_DIR="$(cd "$(dirname "$0")" ; pwd -P)"
 
-echo "install curl\n"
-sudo apt-get install -y curl
-echo "install curl done.\n"
+function macos {
+    # install brew
+    echo "install brew\n"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    # replace upstream to tuna mirrors
+    echo "replace brew upstream to tuna mirrors\n"
+    cd "$(brew --repo)"
+    git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
 
-echo "install nvm\n"
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
-echo "install nvm done.\n"
+    cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+    git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+    brew update
 
-echo "install node\n"
-nvm install 0.11.13
-nvm use 0.11.13
-echo "install node done.\n"
+    echo "install zsh\n"
+    brew install zsh zsh-completions
 
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+    echo "set zsh as default shell\n"
+    chsh -s $(which zsh)
 
-# Install jshint to allow checking of JS code within emacs
-npm install -g jshint
-# Install rlwrap to provide libreadline features with node
-# See: Http://nodejs.org/api/repl.html#repl_repl
-sudo apt-get install -y rlwrap
-# Install tmux(using tmux insteal)
-sudo add-apt-repository -y ppa:pi-rho/dev
-sudo apt-get -qq update
-sudo apt-get install -y tmux=1.9a-1~ppa1~t
-# Install emacs24
-# https://launchpad.net/~cassou/+archive/emacs
-sudo apt-add-repository -y ppa:cassou/emacs
-sudo apt-get -qq update
-sudo apt-get install -y emacs24-nox emacs24-el emacs24-common-non-dfsg
-# Install docker
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
-sudo sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
-sudo apt-get update
-sudo apt-get install lxc-docker
-# Install zeal
-sudo add-apt-repository ppa:jerzy-kozera/zeal-ppa
-sudo apt-get -qq update 
-sudo apt-get install zeal
+    echo "install git\n"
+    brew install git
 
-cd ~
-ln -sb $DOTFILES_DIR/.screenrc .
-ln -sb $DOTFILES_DIR/.bash_profile .
-ln -sb $DOTFILES_DIR/.bashrc .
-ln -sb $DOTFILES_DIR/.bashrc_custom .
-ln -sb $DOTFILES_DIR/.gitconfig .
-ln -sb $DOTFILES_DIR/.tmux.conf .
-ln -sf $DOTFILES_DIR/.emacs.d .
-ln -sf $DOTFILES_DIR/.bash-git-prompt .
-ln -sf $DOTFILES_DIR/.fonts .
+    echo "install fonts\n"
+    brew tap caskroom/fonts && brew cask install font-source-code-pro
+    # install emacs
+    echo "install emacs-plus\n"
+    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+    brew tap d12frosted/emacs-plus
+    brew install emacs-plus
+    ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications
+}
 
-# Install fonts
-fc-cache -fv
- 
-# install jenv
-#curl -L -s get.jenv.io | bash
+# install zsh
+echo "install zsh\n"
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+if [ "$(uname)" == "Darwin" ];then
+    echo "install softwares for mac os\n"
+    macos
+fi
+
+# add node env
+NVS_HOME="$HOME/.nvs"
+echo "install nvs\n"
+git clone https://github.com/jasongin/nvs "$NVS_HOME"
+. "$NVS_HOME/nvs.sh" install
+echo "install nvs done.\n"
+
+echo "install node lts\n"
+nvs add lts
+echo "install node lts done.\n"
+
+ln -sF $DOTFILES_DIR/.gitconfig .
+ln -sF $DOTFILES_DIR/.tmux.conf .
