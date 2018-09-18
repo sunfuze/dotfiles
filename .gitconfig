@@ -1,11 +1,12 @@
 [user]
 	email = sunfuze.1989@gmail.com
 	name = sunfuze
+	signingkey = 284F2792
 [alias]
     st = status -s
     ci = commit
     l = log --oneline --decorate -12 --color
-    ll = log --oneline --decorate --color
+    ll = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%an, %cr)' --abbrev-commit
     lc = log --graph --color
     co = checkout
     br = branch
@@ -18,7 +19,13 @@
 	helper = store
 [core]
 	autocrlf = input
+	excludesfile = /Users/sunfuze/.gitignore
+	ignorecase = false
 [push]
 	default = matching
 [pull]
 	rebase = true
+[color]
+	ui = auto
+[merge]
+	conflictstyle = diff3
