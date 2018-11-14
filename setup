@@ -60,5 +60,6 @@ echo "install node lts\n"
 nvs add lts
 echo "install node lts done.\n"
 
-ln -sF $DOTFILES_DIR/.gitconfig .
-ln -sF $DOTFILES_DIR/.tmux.conf .
+ln -sF $DOTFILES_DIR/.gitconfig $HOME/
+ln -sF $DOTFILES_DIR/.tmux.conf $HOME/
+ln -sF $DOTFILES_DIR/.spacemacs $HOME/
