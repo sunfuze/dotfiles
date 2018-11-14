@@ -31,6 +31,9 @@ function macos {
     brew tap d12frosted/emacs-plus
     brew install emacs-plus
     ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications
+
+    # install tmux
+    brew install tmux --with-utf8proc
 }
 
 # install zsh
@@ -41,6 +44,9 @@ if [ "$(uname)" == "Darwin" ];then
     echo "install softwares for mac os\n"
     macos
 fi
+
+# install tmux plugin manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # add node env
 NVS_HOME="$HOME/.nvs"
