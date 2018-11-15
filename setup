@@ -1,75 +1,87 @@
 #! /bin/bash
 DOTFILES_DIR="$(cd "$(dirname "$0")" ; pwd -P)"
 
+function exists() {
+    local cmd=$1
+    command -v $cmd > /dev/null 2>&1 
+}
+
 function macos {
     # install brew
-    echo "install brew\n"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    # replace upstream to tuna mirrors
-    echo "replace brew upstream to tuna mirrors\n"
-    cd "$(brew --repo)"
-    git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+    if ! exists "brew"; then
+        echo "install brew\n"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        # replace upstream to tuna mirrors
+        echo "replace brew upstream to tuna mirrors\n"
+        cd "$(brew --repo)"
+        git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+        brew update
+    fi
 
-    cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-    git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
-    brew update
+    if [ ! -d $ZSH ]; then
+        echo "install zsh\n"
+        brew install zsh zsh-completions
 
-    echo "install zsh\n"
-    brew install zsh zsh-completions
+        echo "set zsh as default shell\n"
+        chsh -s $(which zsh)
 
-    echo "set zsh as default shell\n"
-    chsh -s $(which zsh)
-
-    echo "install item2 shell integration"
-    curl -L https://iterm2.com/shell_integration/zsh \
-         -o ~/.iterm2_shell_integration.zsh
+        echo "install item2 shell integration"
+        curl -L https://iterm2.com/shell_integration/zsh \
+             -o ~/.iterm2_shell_integration.zsh
+    fi
 
     echo "install git\n"
     brew install git
 
     echo "install fonts\n"
     brew tap caskroom/fonts && brew cask install font-source-code-pro
-    # install emacs
-    echo "install emacs-plus\n"
-    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-    brew tap d12frosted/emacs-plus
-    brew install emacs-plus
-    ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications
 
-    # install tmux
-    brew install tmux --with-utf8proc
-    tic -x -o ~/.terminfo ${DOTFILES_DIR}/xterm-24bit.terminfo
+    if ! exists "emacs"; then
+        # install emacs
+        echo "install emacs-plus\n"
+        git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+        brew tap d12frosted/emacs-plus
+        brew install emacs-plus
+        ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications
+    fi
+
+    if ! exists "tmux"; then
+        # install tmux
+        brew install tmux --with-utf8proc
+        tic -x -o ~/.terminfo ${DOTFILES_DIR}/xterm-24bit.terminfo
+    fi
 
     # install gdb
     brew install gdb
 }
-
-# install zsh
-echo "install zsh\n"
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 if [ "$(uname)" == "Darwin" ];then
     echo "install softwares for mac os\n"
     macos
 fi
 
-# install tmux plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+if [ ! -d ~/.tmux/plugins/tpm ]; then
+    # install tmux plugin manager
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
-# add node env
 NVS_HOME="$HOME/.nvs"
-echo "install nvs\n"
-git clone https://github.com/jasongin/nvs "$NVS_HOME"
-. "$NVS_HOME/nvs.sh" install
-echo "install nvs done.\n"
+if [ ! -d $NVS_HOME ]; then
+    echo "install nvs\n"
+    git clone https://github.com/jasongin/nvs "$NVS_HOME"
+    . "$NVS_HOME/nvs.sh" install
+    echo "install nvs done.\n"
+    echo "install node lts\n"
+    nvs add latest
+    echo "install node lts done.\n"
+    npm i -g tern js-beautify eslint
+fi
 
-echo "install node lts\n"
-nvs add latest 
-echo "install node lts done.\n"
-npm i -g tern js-beautify eslint
-
-ln -sF $DOTFILES_DIR/.gitconfig $HOME/
-ln -sF $DOTFILES_DIR/.spacemacs $HOME/
-ln -sF $DOTFILES_DIR/.gitignore $HOME/
-ln -sF $DOTFILES_DIR/.zshrc $HOME/
-ln -sF $DOTFILES_DIR/.zshenv $HOME/
+ln -sF $DOTFILES_DIR/.gitconfig $HOME/.gitconfig
+ln -sF $DOTFILES_DIR/.spacemacs $HOME/.spacemacs
+ln -sF $DOTFILES_DIR/.gitignore $HOME/.gitignore
+ln -sF $DOTFILES_DIR/.zshrc $HOME/.zshrc
+ln -sF $DOTFILES_DIR/.zshenv $HOME/.zshenv
+ln -sF $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
