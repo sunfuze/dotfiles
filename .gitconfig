@@ -19,7 +19,7 @@
 	helper = store
 [core]
 	autocrlf = input
-	excludesfile = /Users/sunfuze/.gitignore
+	excludesfile = $HOME/.gitignore
 	ignorecase = false
 [push]
 	default = matching
@@ -30,4 +30,4 @@
 [merge]
 	conflictstyle = diff3
 [http]
-	cookiefile = /Users/fuze/.gitcookies
+	cookiefile = $HOME/.gitcookies

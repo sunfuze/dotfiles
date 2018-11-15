@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/fuze/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 
 # Set name of the theme to load --- if set to "random", it will
@@ -104,10 +104,12 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="te ~/.zshrc"
+alias ohmyzsh="te ~/.oh-my-zsh"
 export NVS_HOME="$HOME/.nvs"
 [ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
+
+DEFAULT_USER=$(whoami)
 
 # item2 shell intergration
 source ~/.iterm2_shell_integration.zsh
