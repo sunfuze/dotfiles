@@ -29,3 +29,5 @@
 	ui = auto
 [merge]
 	conflictstyle = diff3
+[http]
+	cookiefile = /Users/fuze/.gitcookies

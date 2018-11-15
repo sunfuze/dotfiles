@@ -20,6 +20,10 @@ function macos {
     echo "set zsh as default shell\n"
     chsh -s $(which zsh)
 
+    echo "install item2 shell integration"
+    curl -L https://iterm2.com/shell_integration/zsh \
+         -o ~/.iterm2_shell_integration.zsh
+
     echo "install git\n"
     brew install git
 
@@ -35,6 +39,9 @@ function macos {
     # install tmux
     brew install tmux --with-utf8proc
     tic -x -o ~/.terminfo ${DOTFILES_DIR}/xterm-24bit.terminfo
+
+    # install gdb
+    brew install gdb
 }
 
 # install zsh
@@ -57,9 +64,12 @@ git clone https://github.com/jasongin/nvs "$NVS_HOME"
 echo "install nvs done.\n"
 
 echo "install node lts\n"
-nvs add lts
+nvs add latest 
 echo "install node lts done.\n"
+npm i -g tern js-beautify eslint
 
 ln -sF $DOTFILES_DIR/.gitconfig $HOME/
-ln -sF $DOTFILES_DIR/.tmux.conf $HOME/
 ln -sF $DOTFILES_DIR/.spacemacs $HOME/
+ln -sF $DOTFILES_DIR/.gitignore $HOME/
+ln -sF $DOTFILES_DIR/.zshrc $HOME/
+ln -sF $DOTFILES_DIR/.zshenv $HOME/

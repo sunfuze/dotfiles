@@ -4,3 +4,6 @@
 **/*.log
 **/ac-comphist.dat
 .tmux/plugins/*
+.idea
+.vscode
+.#*
