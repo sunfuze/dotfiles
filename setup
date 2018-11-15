@@ -51,6 +51,7 @@ function macos {
         # install tmux
         brew install tmux --with-utf8proc
         tic -x -o ~/.terminfo ${DOTFILES_DIR}/xterm-24bit.terminfo
+        brew install reattach-to-user-namespace
     fi
 
     # install gdb

@@ -110,7 +110,5 @@ export NVS_HOME="$HOME/.nvs"
 [ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
 
 DEFAULT_USER=$(whoami)
-
 # item2 shell intergration
 source ~/.iterm2_shell_integration.zsh
-
