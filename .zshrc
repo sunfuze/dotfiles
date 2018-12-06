@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="avit"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -69,6 +69,9 @@ plugins=(
   git
   git-extras
   helm
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  zsh-completions
   jump
   man
   minikube
@@ -116,3 +119,12 @@ source ~/.iterm2_shell_integration.zsh
 
 [[ -s "/Users/fuze/.gvm/scripts/gvm" ]] && source "/Users/fuze/.gvm/scripts/gvm"
 export GOPATH=$HOME/go
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/fuze/.nvs/node/10.13.0/x64/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/fuze/.nvs/node/10.13.0/x64/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/fuze/.nvs/node/10.13.0/x64/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/fuze/.nvs/node/10.13.0/x64/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
