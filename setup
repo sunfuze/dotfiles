@@ -56,12 +56,20 @@ function macos {
 
     # install gdb
     brew install gdb
-}
+
+   }
 
 if [ "$(uname)" == "Darwin" ];then
     echo "install softwares for mac os\n"
     macos
 fi
+
+# install rvm
+curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+# change ruby gems mirror
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+
 
 if [ ! -d ~/.tmux/plugins/tpm ]; then
     # install tmux plugin manager
