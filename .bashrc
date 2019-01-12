@@ -187,3 +187,5 @@ complete -F _completemarks jump unmark
 ## set jenv
 JENV_DIR=$HOME/.jenv
 [[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

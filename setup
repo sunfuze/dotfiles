@@ -70,6 +70,9 @@ curl -sSL https://get.rvm.io | bash -s stable --ruby
 # change ruby gems mirror
 gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
 
+# install gvm
+zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+
 
 if [ ! -d ~/.tmux/plugins/tpm ]; then
     # install tmux plugin manager

@@ -128,3 +128,5 @@ export GOPATH=$HOME/go
 [[ -f /Users/fuze/.nvs/node/10.13.0/x64/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/fuze/.nvs/node/10.13.0/x64/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[[ -s "/Users/sunfuze/.gvm/scripts/gvm" ]] && source "/Users/sunfuze/.gvm/scripts/gvm"
