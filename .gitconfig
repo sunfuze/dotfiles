@@ -2,6 +2,7 @@
 	email = sunfuze.1989@gmail.com
 	name = sunfuze
 	signingkey = 284F2792
+	name = Joe
 [alias]
     st = status -s
     ci = commit
@@ -31,3 +32,4 @@
 	conflictstyle = diff3
 [http]
 	cookiefile = $HOME/.gitcookies
+

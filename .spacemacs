@@ -34,6 +34,7 @@ values."
      html
      (typescript :variables
                  typescript-fmt-on-save t)
+     html
      python
      javascript
      sql
@@ -49,7 +50,10 @@ values."
      auto-completion
      ;; better-defaults
      emacs-lisp
-     ruby
+     (ruby :variables
+           ruby-enable-enh-ruby-mode t
+           ruby-version-manager 'rvm
+           ruby-test-runner 'rspec)
      ruby-on-rails
      go
      git
@@ -322,7 +326,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
           ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
           ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
   (setq helm-dash-docsets-path "/Users/fuze/Library/Application Support/Dash/DocSets")
+<<<<<<< HEAD
   (setq-default typescript-indent-level 2)
+||||||| merged common ancestors
+=======
+  (setq-default js2-basic-offset 2
+                js-indent-level 2
+                js2-strict-missing-semi-warning nil)
+>>>>>>> modify tmux config; add fonts module
   )
 
 (defun dotspacemacs/user-config ()
@@ -343,7 +354,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data rust-mode async org-plus-contrib tide typescript-mode rspec-mode projectile-rails inflections orgit live-py-mode helm-pydoc helm-make helm-dash helm-company helm-c-yasnippet git-timemachine flyspell-correct-helm flyspell-correct evil-surround evil-mc evil-matchit evil-magit evil-args dumb-jump dockerfile-mode docker tablist docker-tramp company-tern tern company-statistics company-go company-anaconda company cargo anaconda-mode ace-link smartparens evil goto-chg flycheck helm helm-core magit magit-popup git-commit ghub treepy graphql with-editor markdown-mode projectile pkg-info epl yapfify yaml-mode xterm-color ws-butler winum which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree toml-mode toc-org sql-indent spaceline smeargle shell-pop rvm ruby-tools ruby-test-mode rubocop robe restart-emacs rbenv rake rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode paradox org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file nginx-mode neotree multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint json-mode js2-refactor js-doc indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-ag google-translate golden-ratio go-guru go-eldoc gnuplot gitconfig-mode gitattributes-mode git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flycheck-rust flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav eclim diminish define-word dash-at-point cython-mode column-enforce-mode coffee-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-jump-helm-line ac-ispell)))
+    (powerline hydra inf-ruby smartparens highlight evil goto-chg flycheck go-mode request projectile helm helm-core magit-popup transient git-commit with-editor lv async markdown-mode alert org-plus-contrib f dash web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data enh-ruby-mode dockerfile-mode docker tablist docker-tramp helm-company helm-c-yasnippet fuzzy company-tern company-statistics company-go company-emacs-eclim company-anaconda company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic web-beautify tern livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc coffee-mode sql-indent toml-mode racer flycheck-rust cargo rust-mode eclim yasnippet inflections flyspell-correct nginx-mode yaml-mode helm-dash dash-at-point which-key aggressive-indent ace-window iedit avy magit xterm-color ws-butler winum volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle shell-pop rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rainbow-delimiters projectile-rails popwin persp-mode paradox orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-ag google-translate golden-ratio go-guru go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ ghub gh-md flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diminish diff-hl define-word column-enforce-mode clean-aindent-mode chruby bundler auto-highlight-symbol auto-dictionary auto-compile adaptive-wrap ace-link ace-jump-helm-line)))
  '(shell-file-name "/usr/local/bin/zsh"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -59,24 +59,34 @@ function macos {
 
    }
 
-if [ "$(uname)" == "Darwin" ];then
+if [ "$(uname)" == "Darwin" ]; then
     echo "install softwares for mac os\n"
     macos
 fi
 
-# install rvm
-curl -sSL https://get.rvm.io | bash -s stable --ruby
+if [ -d "$HOME/.rvm "]; then
+    # install rvm
+    curl -sSL https://get.rvm.io | bash -s stable --ruby
 
-# change ruby gems mirror
-gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
+    # change ruby gems mirror
+    gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
 
-# install gvm
-zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+    gem install bundle pry pry-doc ruby_parser robocop rspec rake
 
+fi
 
-if [ ! -d ~/.tmux/plugins/tpm ]; then
-    # install tmux plugin manager
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+if [ -d "$HOME/.gvm"]; then
+    # install gvm
+    zsh < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+fi
+
+if [ ! -d $DOTFILES_DIR/.tmux/plugins/tpm ]; then
+    git clone https://github.com/tmux-plugins/tpm $DOTFILES_DIR/.tmux/plugins/tpm
+fi
+
+if [ ! -d $DOTFILES_DIR/fonts ]; then
+    git clone https://github.com/powerline/fonts.git $DOTFILES_DIR/fonts
+    sh $DOTFILES_DIR/fonts/install.sh
 fi
 
 NVS_HOME="$HOME/.nvs"
@@ -97,3 +107,4 @@ ln -sF $DOTFILES_DIR/.gitignore $HOME/.gitignore
 ln -sF $DOTFILES_DIR/.zshrc $HOME/.zshrc
 ln -sF $DOTFILES_DIR/.zshenv $HOME/.zshenv
 ln -sF $DOTFILES_DIR/.tmux.conf $HOME/.tmux.conf
+ln -sF $DOTFILES_DIR/.tmux $HOME/.tmux

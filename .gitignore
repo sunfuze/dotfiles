@@ -4,6 +4,7 @@
 **/*.log
 **/ac-comphist.dat
 .tmux/plugins/*
+.tmux/resurrect
 .idea
 .vscode
 .#*
