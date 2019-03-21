@@ -326,14 +326,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
           ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
           ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
   (setq helm-dash-docsets-path "/Users/fuze/Library/Application Support/Dash/DocSets")
-<<<<<<< HEAD
   (setq-default typescript-indent-level 2)
-||||||| merged common ancestors
-=======
   (setq-default js2-basic-offset 2
                 js-indent-level 2
                 js2-strict-missing-semi-warning nil)
->>>>>>> modify tmux config; add fonts module
   )
 
 (defun dotspacemacs/user-config ()
