@@ -41,21 +41,18 @@ values."
      rust
      nginx
      yaml
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
      helm
      auto-completion
-     ;; better-defaults
      emacs-lisp
      (ruby :variables
            ruby-enable-enh-ruby-mode t
            ruby-version-manager 'rvm
            ruby-test-runner 'rspec)
      ruby-on-rails
-     go
+     (go :variables
+         godoc-at-point-function 'godoc-gogetdoc
+         gofmt-command "goimports"
+         go-backend 'lsp)
      git
      markdown
      org
@@ -65,10 +62,12 @@ values."
      (spell-checking :variables
                      spell-checking-enable-by-default nil)
      syntax-checking
-     ;;version-control
      dash
-     ;;java
      docker
+     protobuf
+     treemacs
+     xclipboard
+     lsp
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -262,6 +261,7 @@ values."
    dotspacemacs-show-transient-state-color-guide t
    ;; If non nil unicode symbols are displayed in the mode line. (default t)
    dotspacemacs-mode-line-unicode-symbols nil
+   dotspacemacs-mode-line-theme 'spacemacs
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
@@ -279,7 +279,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil 
+   dotspacemacs-line-numbers 'relative
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -330,6 +330,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq-default js2-basic-offset 2
                 js-indent-level 2
                 js2-strict-missing-semi-warning nil)
+  (setq enh-ruby-add-encoding-comment-on-save nil)
+  (setq ruby-insert-encoding-magic-comment nil)
   )
 
 (defun dotspacemacs/user-config ()
@@ -339,6 +341,9 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (add-hook 'after-init-hook 'inf-ruby-switch-setup)
+  (setq spacemacs-centered-buffer-mode-min-content-width 110)
+  (setq go-format-before-save t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -350,7 +355,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (powerline hydra inf-ruby smartparens highlight evil goto-chg flycheck go-mode request projectile helm helm-core magit-popup transient git-commit with-editor lv async markdown-mode alert org-plus-contrib f dash web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data enh-ruby-mode dockerfile-mode docker tablist docker-tramp helm-company helm-c-yasnippet fuzzy company-tern company-statistics company-go company-emacs-eclim company-anaconda company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic web-beautify tern livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc coffee-mode sql-indent toml-mode racer flycheck-rust cargo rust-mode eclim yasnippet inflections flyspell-correct nginx-mode yaml-mode helm-dash dash-at-point which-key aggressive-indent ace-window iedit avy magit xterm-color ws-butler winum volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle shell-pop rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rainbow-delimiters projectile-rails popwin persp-mode paradox orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-ag google-translate golden-ratio go-guru go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ ghub gh-md flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diminish diff-hl define-word column-enforce-mode clean-aindent-mode chruby bundler auto-highlight-symbol auto-dictionary auto-compile adaptive-wrap ace-link ace-jump-helm-line)))
+    (rake pcre2el spinner org-category-capture log4e gntp parent-mode gitignore-mode pos-tip pkg-info epl flx anzu undo-tree bind-map bind-key packed s popup tide typescript-mode powerline hydra inf-ruby smartparens highlight evil goto-chg flycheck go-mode request projectile helm helm-core magit-popup transient git-commit with-editor lv async markdown-mode alert org-plus-contrib f dash web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data enh-ruby-mode dockerfile-mode docker tablist docker-tramp helm-company helm-c-yasnippet fuzzy company-tern company-statistics company-go company-emacs-eclim company-anaconda company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic web-beautify tern livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc coffee-mode sql-indent toml-mode racer flycheck-rust cargo rust-mode eclim yasnippet inflections flyspell-correct nginx-mode yaml-mode helm-dash dash-at-point which-key aggressive-indent ace-window iedit avy magit xterm-color ws-butler winum volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle shell-pop rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rainbow-delimiters projectile-rails popwin persp-mode paradox orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-ag google-translate golden-ratio go-guru go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ ghub gh-md flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diminish diff-hl define-word column-enforce-mode clean-aindent-mode chruby bundler auto-highlight-symbol auto-dictionary auto-compile adaptive-wrap ace-link ace-jump-helm-line)))
  '(shell-file-name "/usr/local/bin/zsh"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -358,3 +363,24 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (lsp-ui lsp-treemacs helm-lsp company-lsp lsp-mode rake pcre2el spinner org-category-capture log4e gntp parent-mode gitignore-mode pos-tip pkg-info epl flx anzu undo-tree bind-map bind-key packed s popup tide typescript-mode powerline hydra inf-ruby smartparens highlight evil goto-chg flycheck go-mode request projectile helm helm-core magit-popup transient git-commit with-editor lv async markdown-mode alert org-plus-contrib f dash web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data enh-ruby-mode dockerfile-mode docker tablist docker-tramp helm-company helm-c-yasnippet fuzzy company-tern company-statistics company-go company-emacs-eclim company-anaconda company auto-yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic web-beautify tern livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc coffee-mode sql-indent toml-mode racer flycheck-rust cargo rust-mode eclim yasnippet inflections flyspell-correct nginx-mode yaml-mode helm-dash dash-at-point which-key aggressive-indent ace-window iedit avy magit xterm-color ws-butler winum volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smeargle shell-pop rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv rainbow-delimiters projectile-rails popwin persp-mode paradox orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-ag google-translate golden-ratio go-guru go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ ghub gh-md flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diminish diff-hl define-word column-enforce-mode clean-aindent-mode chruby bundler auto-highlight-symbol auto-dictionary auto-compile adaptive-wrap ace-link ace-jump-helm-line)))
+ '(shell-file-name "/usr/local/bin/zsh"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
